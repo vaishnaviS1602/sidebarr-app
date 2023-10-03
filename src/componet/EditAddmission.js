@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CCol, CFormInput, CForm, CButton } from "@coreui/react";
 
-const Addform = () => {
+const EditAddmission = () => {
   const [user_id, setUserId] = useState({});
   const [mobile_no, setMobileNo] = useState({});
   const [email, setEmail] = useState({});
@@ -14,11 +14,29 @@ const Addform = () => {
   const [state, setState] = useState({});
   const [zip, setZip] = useState({});
 
-  const uploadContactDetails = async (event) => {
+  const [addmission, setAddmission] = useState("");
+  const { id } = useParams();
+
+  useEffect(() => {
+    loadAddmissionDetail();
+  }, []);
+
+  const loadAddmissionDetail = async () => {
+    const response = await fetch("http://localhost:3000/addmissions/view/" + id);
+    const resData = await response.json();
+    console.log(resData);
+    setAddmission(resData);
+    // setTitle(resData.title);
+    // setUrl(resData.url);
+    // setDetail(resData.detail);
+  };
+
+  const uploadAddmissionDetails = async (event) => {
     event.preventDefault();
 
     const requestOptions = {
-      method: "POST",body: JSON.stringify({
+      method: "POST",
+      body: JSON.stringify({
         user_id: user_id,
         mobile_no: mobile_no,
         email: email,
@@ -37,14 +55,13 @@ const Addform = () => {
     );
     const resData = await response.json();
     console.log(resData);
-
   };
   return (
     <>
       <CForm
         className="row g-3"
         method="post"
-        onSubmit={uploadContactDetails}
+        onSubmit={uploadAddmissionDetails}
         style={{ margin: "20px 0px 0px 20px" }}
       >
         <CCol md={12}>
@@ -159,4 +176,4 @@ const Addform = () => {
   );
 };
 
-export default Addform;
+export default EditAddmission;

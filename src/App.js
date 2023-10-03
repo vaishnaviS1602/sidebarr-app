@@ -14,9 +14,9 @@ function App() {
         </div>
         <div className="col-md-10">
           <Routes>
-            <Route path="/addmision_list" element={<AddmisionList />} />
-            <Route path="addmision_list/add" element={<Addform />} />
-            <Route path="/addmision_list/edit/" element={<Addform />} />
+            <Route path="/addmissions" element={<AddmisionList />} />
+            <Route path="addmissions/add" element={<Addform />} />
+            <Route path="/addmissions/edit/" element={<Addform />} />
             
           </Routes>
         </div>

@@ -9,17 +9,16 @@ import {
 } from "@coreui/react";
 
 const ContactList = () => {
-  const [addforms, setAddForms] = useState([]);
-
+  const [addmissions, setAddmissions] = useState([]);
   useEffect(() => {
-    loadaddformFromServer();
+    loadAddmissiosFromServer();
   }, []);
 
-  const loadaddformFromServer = async () => {
-    const response = await fetch("http://localhost:8000/addmision_list");
+  const loadAddmissiosFromServer = async () => {
+    const response = await fetch("http://localhost:3000/addmissions");
     const resData = await response.json();
     console.log(resData);
-    setAddForms(resData);
+    setAddmissions(resData);
   };
 
   return (
@@ -27,6 +26,7 @@ const ContactList = () => {
       <CTable>
         <CTableHead>
           <CTableRow>
+          <CTableHeaderCell scope="col"> Id</CTableHeaderCell>
             <CTableHeaderCell scope="col">User Id</CTableHeaderCell>
             <CTableHeaderCell scope="col">Mobile No</CTableHeaderCell>
             <CTableHeaderCell scope="col">Email Id</CTableHeaderCell>
@@ -34,23 +34,29 @@ const ContactList = () => {
             <CTableHeaderCell scope="col">Last Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Gender</CTableHeaderCell>
             <CTableHeaderCell scope="col"> Type Of Class</CTableHeaderCell>
+            <CTableHeaderCell scope="col">City</CTableHeaderCell>
+            <CTableHeaderCell scope="col">State</CTableHeaderCell>
+            <CTableHeaderCell scope="col"> Zip</CTableHeaderCell>
             <CTableHeaderCell scope="col">Update</CTableHeaderCell>
             <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
 
         <CTableBody>
-          {addforms.map((addform) => {
+          {addmissions.map((addmission) => {
             return (
-              <CTableRow key={addform.id}>
-                <CTableHeaderCell scope="row">{addform.id}</CTableHeaderCell>
-                <CTableDataCell>{addform.user_id}</CTableDataCell>
-                <CTableDataCell>{addform.mobile_no}</CTableDataCell>
-                {/* <CTableDataCell>{addform.email_id}</CTableDataCell>
-                <CTableDataCell>{addform.first_name}</CTableDataCell>
-                <CTableDataCell>{addform.last_name}</CTableDataCell>
-                <CTableDataCell>{addform.gender}</CTableDataCell>
-                <CTableDataCell>{addform.list_of_class}</CTableDataCell> */}
+              <CTableRow key={addmission.id}>
+                <CTableHeaderCell scope="row">{addmission.id}</CTableHeaderCell>
+                <CTableDataCell>{addmission.user_id}</CTableDataCell>
+                <CTableDataCell>{addmission.mobile_no}</CTableDataCell>
+                <CTableDataCell>{addmission.email_id}</CTableDataCell>
+                <CTableDataCell>{addmission.first_name}</CTableDataCell>
+                <CTableDataCell>{addmission.last_name}</CTableDataCell>
+                <CTableDataCell>{addmission.gender}</CTableDataCell>
+                <CTableDataCell>{addmission.list_of_class}</CTableDataCell>
+                <CTableDataCell>{addmission.city}</CTableDataCell>
+                <CTableDataCell>{addmission.state}</CTableDataCell>
+                <CTableDataCell>{addmission.zip}</CTableDataCell>
                 <CTableDataCell>
                   <button className="text-decoration-none btn btn-sm btn-success">Update</button>
                 </CTableDataCell>
